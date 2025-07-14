@@ -1,6 +1,7 @@
 name: InContext CI/CD
 
 on:
+  workflow_dispatch:
   push:
     branches: [main]
   pull_request:
@@ -9,26 +10,29 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      EXPO_ACCESS_TOKEN: ${{ secrets.EXPO_TOKEN }}
+
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 18
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
-      - name: Lint code
-        run: npm run lint
+      - name: Lint + tests
+        run: npm run lint && npm test
 
       - name: Install EAS CLI
         run: npm install -g eas-cli
 
-      - name: Log in to EAS
-        run: eas whoami || eas login --token ${{secrets.EXPO_TOKEN}}
+      - name: Verify Expo account
+        run: eas whoami          
 
-      - name: EAS Build (Preview)
+      - name: EAS Build (preview)
         run: eas build --platform all --profile preview --non-interactive
