@@ -1,12 +1,14 @@
 {
+	"cli": {"version": ">= 5.0.0"},
+
 	"build": {
 		"production": {
-			"workflow": "managed",
-			"releaseChannel": "production"
+			"channel": "production",
+			"distribution": "store"
 		},
 		"preview": {
-			"workflow": "managed",
-			"developmentClient": true
+			"developmentClient": true,
+			"channel": "preview"
 		}
 	}
 }
