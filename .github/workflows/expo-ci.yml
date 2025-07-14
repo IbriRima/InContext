@@ -35,4 +35,4 @@ jobs:
         run: eas whoami          
 
       - name: EAS Build (preview)
-        run: eas build --profile production --platform all --non-interactive
+        run: eas build --profile production --platform android --non-interactive

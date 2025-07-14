@@ -15,7 +15,8 @@
 		},
 		"ios": {
 			"supportsTablet": true,
-			"bundleIdentifier": "com.incontext.incontextapp"
+			"bundleIdentifier": "com.incontext.incontextapp",
+			"infoPlist": {"ITSAppUsesNonExemptEncryption": false}
 		},
 		"android": {
 			"adaptiveIcon": {
