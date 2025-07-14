@@ -1,10 +1,29 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
-export default function HomeScreen({ navigation }) {
-  const handleLogout = () => {
-    navigation.navigate('Login');
-  };
+/* ------------------------------------------------------------------ */
+/* 🔑 1. Navigation types                                             */
+/* ------------------------------------------------------------------ */
+type RootStackParamList = {
+  Home: undefined;
+  Login: undefined;
+  /* add other routes here if needed */
+};
+
+type Props = Readonly<NativeStackScreenProps<RootStackParamList, 'Home'>>;
+
+/* ------------------------------------------------------------------ */
+/* 🚀 2. Component                                                    */
+/* ------------------------------------------------------------------ */
+export default function HomeScreen({ navigation }: Props) {
+  const handleLogout = () => navigation.navigate('Login');
 
   return (
     <ScrollView style={styles.container}>
@@ -14,6 +33,7 @@ export default function HomeScreen({ navigation }) {
       </View>
 
       <View style={styles.content}>
+        {/* --- Quick Start Card --- */}
         <View style={styles.card}>
           <Text style={styles.cardTitle}>Quick Start</Text>
           <Text style={styles.cardText}>
@@ -24,6 +44,7 @@ export default function HomeScreen({ navigation }) {
           </TouchableOpacity>
         </View>
 
+        {/* --- Progress Card --- */}
         <View style={styles.card}>
           <Text style={styles.cardTitle}>Progress</Text>
           <Text style={styles.cardText}>
@@ -34,6 +55,7 @@ export default function HomeScreen({ navigation }) {
           </TouchableOpacity>
         </View>
 
+        {/* --- Settings Card --- */}
         <View style={styles.card}>
           <Text style={styles.cardTitle}>Settings</Text>
           <Text style={styles.cardText}>
@@ -52,6 +74,9 @@ export default function HomeScreen({ navigation }) {
   );
 }
 
+/* ------------------------------------------------------------------ */
+/* 🎨 3. Styles                                                       */
+/* ------------------------------------------------------------------ */
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -84,10 +109,7 @@ const styles = StyleSheet.create({
     padding: 20,
     marginBottom: 16,
     shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 3.84,
     elevation: 5,

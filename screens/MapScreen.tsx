@@ -1,16 +1,39 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Dimensions,
+} from 'react-native';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+
+/* ------------------------------------------------------------------ */
+/* 🔑 Navigation types                                                */
+/* ------------------------------------------------------------------ */
+type RootStackParamList = {
+  Map: undefined;
+  Chat: { place: string };
+  Login: undefined; // add others if needed
+};
+
+/* 🛡 Read-only props (Sonar rule S6759) */
+type Props = Readonly<
+  NativeStackScreenProps<RootStackParamList, 'Map'>
+>;
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
-export default function MapScreen({ navigation }) {
+/* ------------------------------------------------------------------ */
+/* 🚀 Component                                                       */
+/* ------------------------------------------------------------------ */
+export default function MapScreen({ navigation }: Props) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>🗺️ Town Map</Text>
 
-      {/* Simulated grid-based map */}
       <View style={styles.mapArea}>
-        {/* Store blocks */}
+        {/* ☕ Café */}
         <TouchableOpacity
           style={[styles.tile, styles.shopTile]}
           onPress={() => navigation.navigate('Chat', { place: 'Café' })}
@@ -18,6 +41,7 @@ export default function MapScreen({ navigation }) {
           <Text style={styles.tileText}>☕ Café</Text>
         </TouchableOpacity>
 
+        {/* 📚 Library */}
         <TouchableOpacity
           style={[styles.tile, styles.shopTile]}
           onPress={() => navigation.navigate('Chat', { place: 'Library' })}
@@ -25,6 +49,7 @@ export default function MapScreen({ navigation }) {
           <Text style={styles.tileText}>📚 Library</Text>
         </TouchableOpacity>
 
+        {/* 🧍 Tourist */}
         <TouchableOpacity
           style={[styles.tile, styles.npcTile]}
           onPress={() => navigation.navigate('Chat', { place: 'Tourist' })}
@@ -36,6 +61,9 @@ export default function MapScreen({ navigation }) {
   );
 }
 
+/* ------------------------------------------------------------------ */
+/* 🎨 Styles                                                          */
+/* ------------------------------------------------------------------ */
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -62,12 +90,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 16,
   },
-  shopTile: {
-    backgroundColor: '#ffe3a3',
-  },
-  npcTile: {
-    backgroundColor: '#b0f3c8',
-  },
+  shopTile: { backgroundColor: '#ffe3a3' },
+  npcTile: { backgroundColor: '#b0f3c8' },
   tileText: {
     fontSize: 18,
     fontWeight: '600',
