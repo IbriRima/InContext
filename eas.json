@@ -1,0 +1,12 @@
+{
+	"build": {
+		"production": {
+			"workflow": "managed",
+			"releaseChannel": "production"
+		},
+		"preview": {
+			"workflow": "managed",
+			"developmentClient": true
+		}
+	}
+}

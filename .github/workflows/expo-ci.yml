@@ -1,0 +1,37 @@
+name: InContext CI/CD
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Lint code
+        run: npm run lint
+
+      - name: Run tests
+        run: npm test
+
+      - name: Install EAS CLI
+        run: npm install -g eas-cli
+
+      - name: Log in to EAS
+        run: eas whoami || eas login --token ${{secrets.EXPO_TOKEN}}
+
+      - name: EAS Build (Preview)
+        run: eas build --platform all --profile preview --non-interactive
