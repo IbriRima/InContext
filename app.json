@@ -1,38 +1,39 @@
 {
-  "expo": {
-    "name": "InContextApp",
-    "slug": "InContextApp",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
-    "newArchEnabled": true,
-    "splash": {
-      "image": "./assets/splash-icon.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
-    "ios": {
-      "supportsTablet": true
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      },
-      "edgeToEdgeEnabled": true
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    },
-    "plugins": [
-      "expo-web-browser"
-    ],
-    "extra": {
-      "eas": {
-        "projectId": "8149fac0-509e-4a4b-a397-fa8d53f5adfd"
-      }
-    },
-    "owner": "rima03"
-  }
+	"expo": {
+		"name": "InContextApp",
+		"slug": "InContextApp",
+		"version": "1.0.0",
+		"orientation": "portrait",
+		"icon": "./assets/icon.png",
+		"userInterfaceStyle": "light",
+
+		"newArchEnabled": true,
+		"splash": {
+			"image": "./assets/splash-icon.png",
+			"resizeMode": "contain",
+			"backgroundColor": "#ffffff"
+		},
+		"ios": {
+			"supportsTablet": true,
+			"bundleIdentifier": "com.incontext.incontextapp"
+		},
+		"android": {
+			"adaptiveIcon": {
+				"foregroundImage": "./assets/adaptive-icon.png",
+				"backgroundColor": "#ffffff"
+			},
+			"edgeToEdgeEnabled": true,
+			"package": "com.incontext.incontextapp"
+		},
+		"web": {
+			"favicon": "./assets/favicon.png"
+		},
+		"plugins": ["expo-web-browser"],
+		"extra": {
+			"eas": {
+				"projectId": "8149fac0-509e-4a4b-a397-fa8d53f5adfd"
+			}
+		},
+		"owner": "rima03"
+	}
 }
