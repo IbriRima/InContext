@@ -1,14 +1,13 @@
 {
-	"cli": {"version": ">= 5.0.0"},
+	"cli": {
+		"version": ">= 5.0.0",
+		"appVersionSource": "remote"
+	},
 
 	"build": {
 		"production": {
 			"channel": "production",
 			"distribution": "store"
-		},
-		"preview": {
-			"developmentClient": true,
-			"channel": "preview"
 		}
 	}
 }
