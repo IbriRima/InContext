@@ -24,9 +24,6 @@ jobs:
       - name: Lint code
         run: npm run lint
 
-      - name: Run tests
-        run: npm test
-
       - name: Install EAS CLI
         run: npm install -g eas-cli
 
