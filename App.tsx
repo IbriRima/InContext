@@ -1,13 +1,14 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import {
   createNativeStackNavigator,
   NativeStackNavigationOptions,
 } from '@react-navigation/native-stack';
 
-import LoginScreen from './screens/LoginScreen';
-import MapScreen   from './screens/MapScreen';
-import ChatScreen  from './screens/ChatScreen';
+import LoginScreen from './src/screens/LoginScreen';
+import MapScreen   from './src/screens/MapScreen';
+import ChatScreen  from './src/screens/ChatScreen';
 
 /* ------------------------------------------------------------------ */
 /* 🔑 All route names and params in one place                          */
@@ -15,7 +16,7 @@ import ChatScreen  from './screens/ChatScreen';
 export type RootStackParamList = {
   Login: undefined;
   Map:   undefined;
-  Chat:  { place: string };   // adjust if Chat takes different params
+  Chat:  { place?: string };   // adjust if Chat takes different params
 };
 
 /* ------------------------------------------------------------------ */
@@ -32,15 +33,18 @@ const screenOptions: NativeStackNavigationOptions = {
 /* ------------------------------------------------------------------ */
 export default function App(): React.JSX.Element {
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="Login"
-        screenOptions={screenOptions}
-      >
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="Map"   component={MapScreen}   />
-        <Stack.Screen name="Chat"  component={ChatScreen}  />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <Stack.Navigator
+          id={undefined}
+          initialRouteName="Login"
+          screenOptions={screenOptions}
+        >
+          <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen name="Map"   component={MapScreen}   />
+          <Stack.Screen name="Chat"  component={ChatScreen}  />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 }
