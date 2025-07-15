@@ -52,3 +52,4 @@ coverage/
 *.log
 *.lock
 
+venv/
