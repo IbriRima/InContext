@@ -6,10 +6,12 @@ export type RootStackParamList = {
   Map: undefined;
   Login: undefined;
   Story: { storyId: string; storyTitle: string };
+  YouTube: undefined;
 };
 
 export type ChatScreenProps = NativeStackScreenProps<RootStackParamList, 'Chat'>;
 export type HomeScreenProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
 export type MapScreenProps = NativeStackScreenProps<RootStackParamList, 'Map'>;
 export type LoginScreenProps = NativeStackScreenProps<RootStackParamList, 'Login'>;
-export type StoryScreenProps = NativeStackScreenProps<RootStackParamList, 'Story'>; 
+export type StoryScreenProps = NativeStackScreenProps<RootStackParamList, 'Story'>;
+export type YouTubeScreenProps = NativeStackScreenProps<RootStackParamList, 'YouTube'>; 

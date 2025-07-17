@@ -12,6 +12,7 @@ import ChatScreen  from './src/screens/ChatScreen';
 import HomeScreen  from './src/screens/HomeScreen';
 import StoriesBookScreen from './src/screens/storiesBook';
 import StoryScreen from './src/screens/storyScreen';
+import YouTubeScreen from './src/screens/YouTubeScreen';
 
 /* ------------------------------------------------------------------ */
 /* 🔑 All route names and params in one place                          */
@@ -23,6 +24,7 @@ export type RootStackParamList = {
   Home:  undefined;
   StoriesBook: undefined;
   Story: { storyId: string; storyTitle: string };
+  YouTube: undefined;
 };
 
 /* ------------------------------------------------------------------ */
@@ -52,6 +54,7 @@ export default function App(): React.JSX.Element {
           <Stack.Screen name="Home"  component={HomeScreen}  />
           <Stack.Screen name="StoriesBook" component={StoriesBookScreen} />
           <Stack.Screen name="Story"  component={StoryScreen}  />
+          <Stack.Screen name="YouTube"  component={YouTubeScreen}  />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>

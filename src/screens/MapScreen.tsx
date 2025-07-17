@@ -17,6 +17,7 @@ type RootStackParamList = {
   Login: undefined;
   Home: undefined;
   StoriesBook: undefined;
+  YouTube: undefined;
 };
 
 /* 🛡 Read-only props (Sonar rule S6759) */
@@ -74,6 +75,14 @@ export default function MapScreen({ navigation }: Props) {
         >
           <Text style={styles.tileText}>🏠 Home</Text>
         </TouchableOpacity>
+
+        {/* 📺 YouTube */}
+        <TouchableOpacity
+          style={[styles.tile, styles.youtubeTile]}
+          onPress={() => navigation.navigate('YouTube')}
+        >
+          <Text style={styles.tileText}>📺 YouTube</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -112,6 +121,7 @@ const styles = StyleSheet.create({
   npcTile: { backgroundColor: '#b0f3c8' },
   storyTile: { backgroundColor: '#e8f5e8' },
   homeTile: { backgroundColor: '#fce4ec' },
+  youtubeTile: { backgroundColor: '#ff6b6b' },
   tileText: {
     fontSize: 18,
     fontWeight: '600',

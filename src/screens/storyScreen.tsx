@@ -16,90 +16,95 @@ type Props = StoryScreenProps;
 /* 📖 Story Content                                                    */
 /* ------------------------------------------------------------------ */
 const storyContent = {
-  adventure: {
-    title: '🌄 The Mountain Adventure',
-    content: `The crisp mountain air filled your lungs as you stood at the base of the towering peaks. The ancient stone path wound its way upward, disappearing into the misty clouds above.
-
-Your journey began with a simple map and a heart full of courage. The locals had warned you about the mysterious sounds that echoed through the valleys at night, but nothing could deter you from discovering what lay hidden in these sacred mountains.
-
-As you climbed higher, the air grew thinner and the path more treacherous. Strange markings on the rocks seemed to tell a story of those who had come before you. Each step brought you closer to the truth that had drawn you here.
-
-The sun was setting when you reached the ancient temple carved into the mountainside. Its weathered stone walls held secrets that had been waiting for centuries to be discovered. The moment you stepped inside, you knew your life would never be the same.
-
-What mysteries await you in the heart of the mountain?`,
-  },
-  mystery: {
-    title: '🔍 The Hidden Library',
-    content: `The old university building had always held an air of mystery, but today was different. As you walked through the grand entrance, you noticed something peculiar - a door that hadn't been there yesterday.
-
-The door was small and unassuming, tucked away behind a dusty bookshelf. Its brass handle gleamed as if it had been polished recently, though no one had been in this section of the library for months.
-
-Curiosity got the better of you, and you reached for the handle. To your surprise, it turned easily, revealing a narrow staircase leading down into darkness. The air was cool and carried the scent of old parchment and leather.
-
-Descending the stairs, you found yourself in a chamber unlike anything you'd ever seen. Books lined the walls from floor to ceiling, their spines glowing with an otherworldly light. Some of the titles were written in languages you couldn't recognize.
-
-In the center of the room stood a massive wooden table, covered in ancient manuscripts and mysterious artifacts. One book in particular caught your eye - it seemed to pulse with energy, as if it was alive.
-
-The librarian had never mentioned this place, and you were certain it wasn't on any of the building's blueprints. What secrets does this hidden library hold?`,
-  },
-  fantasy: {
-    title: '🐉 Dragon\'s Treasure',
-    content: `The ancient scrolls spoke of a dragon's hoard hidden deep within the Crystal Caves, protected by magic older than the kingdom itself. As you approached the cave entrance, you could feel the power emanating from within.
-
-Your quest had begun with a simple map found in the ruins of an old wizard's tower. The parchment was fragile and yellowed with age, but the directions were clear - follow the path of the setting sun until you reach the mountain with two peaks.
-
-The cave entrance was marked with runes that glowed with a soft blue light. As you stepped inside, the air grew warmer and you could hear the distant sound of water dripping from crystal formations.
-
-The deeper you ventured, the more magnificent the cave became. Stalactites and stalagmites sparkled like diamonds, and the walls seemed to pulse with an inner light. You could sense that you were getting closer to your goal.
-
-Finally, you reached the heart of the cave - a vast chamber filled with treasures beyond imagination. Gold coins, precious gems, and magical artifacts were scattered across the floor. But in the center of it all, resting on a pedestal of pure crystal, was the dragon's most prized possession.
-
-The dragon itself was nowhere to be seen, but you could feel its presence, watching and waiting. The treasure was within your reach, but at what cost?`,
-  },
-  scifi: {
-    title: '🚀 Space Explorer',
-    content: `The year was 2157, and you were the first human to set foot on the mysterious planet designated as XR-847. Your spaceship, the Stellar Pioneer, had detected unusual energy signatures emanating from the planet's surface.
-
-As you stepped out of your landing pod, the alien landscape stretched before you in all directions. The sky was a deep purple, and two moons hung low on the horizon. The air was breathable, but carried a sweet, unfamiliar scent.
-
-Your mission was simple: investigate the energy source and determine if the planet was suitable for human colonization. But as you began your exploration, you quickly realized that XR-847 held secrets that would change humanity's understanding of the universe.
-
-The energy signatures led you to a massive structure that seemed to be part building, part living organism. Its walls pulsed with light, and strange symbols covered every surface. As you approached, the structure seemed to recognize your presence.
-
-A holographic projection appeared before you, showing images of other worlds, other civilizations. The message was clear - you were not the first to discover this place, and you wouldn't be the last.
-
-What ancient knowledge awaits you in the depths of this alien structure?`,
-  },
-  romance: {
-    title: '💕 Love in Paris',
-    content: `The rain fell softly on the cobblestone streets of Paris as you hurried through the narrow alleyways of Montmartre. The city of love had always held a special place in your heart, but today felt different.
-
-You had come to Paris to find inspiration for your next novel, but fate had other plans. As you ducked into a small café to escape the rain, you found yourself face to face with someone who would change your life forever.
-
-The café was cozy and warm, filled with the aroma of freshly baked croissants and strong coffee. Paintings by local artists covered the walls, and soft jazz music played in the background. It was the perfect setting for a romantic encounter.
-
-She was sitting by the window, lost in a book, completely unaware of the world around her. Her dark hair fell in soft waves around her shoulders, and the light from the street lamps created a halo effect around her.
-
-When she looked up and smiled at you, time seemed to stand still. In that moment, you knew that your life would never be the same. The city of Paris had worked its magic once again, bringing together two souls who were meant to find each other.
-
-What adventures await you in the most romantic city in the world?`,
-  },
-  horror: {
-    title: '👻 The Haunted Mansion',
-    content: `The old Victorian mansion loomed before you, its dark windows staring like empty eyes into the night. You had inherited this place from your great-uncle, but the locals had warned you about the strange occurrences that happened within its walls.
-
-As you stepped through the front door, the air grew thick with the scent of old wood and something else - something you couldn't quite identify. The floorboards creaked beneath your feet, and you could hear the wind howling through the chimney.
-
-The mansion was filled with antique furniture and family portraits that seemed to follow you with their eyes. In the parlor, you found your great-uncle's journal, filled with rambling entries about voices in the night and shadows that moved on their own.
-
-As you explored deeper into the house, you began to notice things that couldn't be explained. Doors would open and close on their own, and you could hear footsteps echoing through empty hallways. The temperature would drop suddenly, and you could feel eyes watching you from the darkness.
-
-In the attic, you discovered a room that had been sealed off for decades. The door was covered in strange symbols, and the air was thick with an oppressive energy. Something was waiting for you inside, something that had been waiting for a very long time.
-
-What horrors lurk in the shadows of your family's past?`,
-  },
-};
-
+    adventure: {
+      title: '🌄 Das Bergabenteuer',
+      content: `Die frische Bergluft füllte deine Lungen, als du am Fuße der gewaltigen Gipfel standest. Der uralte Steinpfad schlängelte sich nach oben und verschwand in den nebligen Wolken darüber.
+  
+  Deine Reise begann mit einer einfachen Karte und einem Herzen voller Mut. Die Einheimischen hatten dich vor den geheimnisvollen Geräuschen gewarnt, die nachts durch die Täler hallten, doch nichts konnte dich davon abhalten, herauszufinden, was in diesen heiligen Bergen verborgen lag.
+  
+  Je höher du stiegst, desto dünner wurde die Luft und desto gefährlicher der Pfad. Seltsame Markierungen auf den Felsen schienen von jenen zu erzählen, die vor dir gekommen waren. Jeder Schritt brachte dich der Wahrheit näher, die dich hierher geführt hatte.
+  
+  Die Sonne ging gerade unter, als du den uralten Tempel erreichtest, der in die Bergflanke gehauen war. Seine verwitterten Steinmauern bargen Geheimnisse, die seit Jahrhunderten darauf warteten, entdeckt zu werden. In dem Moment, in dem du eintratst, wusstest du, dass dein Leben nie wieder dasselbe sein würde.
+  
+  Welche Geheimnisse erwarten dich im Herzen des Berges?`,
+    },
+  
+    mystery: {
+      title: '🔍 Die Verborgene Bibliothek',
+      content: `Das alte Universitätsgebäude hatte schon immer eine geheimnisvolle Aura, doch heute war es anders. Als du durch den großen Eingang tratst, fiel dir etwas Merkwürdiges auf – eine Tür, die gestern noch nicht da gewesen war.
+  
+  Die Tür war klein und unscheinbar, versteckt hinter einem staubigen Bücherregal. Ihr Messinggriff glänzte, als wäre er erst kürzlich poliert worden, obwohl seit Monaten niemand diesen Teil der Bibliothek betreten hatte.
+  
+  Deine Neugier siegte, und du griffst nach dem Griff. Zu deiner Überraschung drehte er sich mühelos und gab eine schmale Treppe frei, die hinab in die Dunkelheit führte. Die Luft war kühl und roch nach altem Pergament und Leder.
+  
+  Als du die Treppe hinabstiegst, befandest du dich in einer Kammer, wie du sie noch nie gesehen hattest. Bücher säumten die Wände vom Boden bis zur Decke, ihre Rücken leuchteten in einem unirdischen Licht. Einige Titel waren in Sprachen geschrieben, die du nicht erkennen konntest.
+  
+  In der Mitte des Raumes stand ein massiver Holztisch, bedeckt mit uralten Manuskripten und geheimnisvollen Artefakten. Ein Buch erregte besonders deine Aufmerksamkeit – es schien vor Energie zu pulsieren, als wäre es lebendig.
+  
+  Der Bibliothekar hatte diesen Ort nie erwähnt, und du warst sicher, dass er auf keinem Grundriss des Gebäudes verzeichnet war. Welche Geheimnisse birgt diese verborgene Bibliothek?`,
+    },
+  
+    fantasy: {
+      title: '🐉 Der Schatz des Drachen',
+      content: `Die uralten Schriftrollen erzählten von einem Drachenschatz, der tief in den Kristallhöhlen verborgen und von einer Magie geschützt war, die älter war als das Königreich selbst. Als du den Höhleneingang erreichtest, spürtest du die Kraft, die aus dem Inneren strömte.
+  
+  Dein Abenteuer hatte mit einer einfachen Karte begonnen, die du in den Ruinen eines alten Zaubererturms gefunden hattest. Das Pergament war brüchig und vergilbt, doch die Anweisungen waren klar – folge dem Pfad der untergehenden Sonne, bis du den Berg mit den zwei Gipfeln erreichst.
+  
+  Der Höhleneingang war mit Runen markiert, die in einem sanften blauen Licht leuchteten. Als du eintratst, wurde die Luft wärmer, und du hörtest das entfernte Tropfen von Wasser, das von Kristallformationen fiel.
+  
+  Je tiefer du vordrangst, desto prachtvoller wurde die Höhle. Stalaktiten und Stalagmiten funkelten wie Diamanten, und die Wände schienen von einem inneren Licht zu pulsieren. Du spürtest, dass du deinem Ziel näherkamst.
+  
+  Schließlich erreichtest du das Herz der Höhle – eine gewaltige Kammer, gefüllt mit Schätzen jenseits aller Vorstellungskraft. Goldmünzen, kostbare Edelsteine und magische Artefakte lagen überall verstreut. Doch in der Mitte, auf einem Sockel aus purem Kristall, lag der wertvollste Besitz des Drachen.
+  
+  Der Drache selbst war nirgends zu sehen, doch du konntest seine Präsenz spüren, wie er beobachtete und lauerte. Der Schatz war zum Greifen nah – aber um welchen Preis?`,
+    },
+  
+    scifi: {
+      title: '🚀 Weltraumforscher',
+      content: `Wir schreiben das Jahr 2157, und du bist der erste Mensch, der den geheimnisvollen Planeten XR-847 betritt. Dein Raumschiff, die Stellar Pioneer, hatte ungewöhnliche Energiesignaturen auf der Oberfläche des Planeten festgestellt.
+  
+  Als du aus deiner Landekapsel tratst, erstreckte sich die fremdartige Landschaft in alle Richtungen. Der Himmel war ein tiefes Violett, und zwei Monde hingen niedrig am Horizont. Die Luft war atembar, trug jedoch einen süßen, ungewohnten Duft.
+  
+  Deine Mission war einfach: Untersuche die Energiequelle und bestimme, ob der Planet für eine menschliche Kolonie geeignet ist. Doch schon zu Beginn deiner Erkundung wurde dir klar, dass XR-847 Geheimnisse birgt, die das Verständnis der Menschheit vom Universum verändern würden.
+  
+  Die Energiesignaturen führten dich zu einer gewaltigen Struktur, die halb Gebäude, halb lebender Organismus zu sein schien. Ihre Wände pulsierten vor Licht, und seltsame Symbole bedeckten jede Fläche. Als du dich näherstest, schien die Struktur deine Präsenz zu erkennen.
+  
+  Eine holografische Projektion erschien vor dir und zeigte Bilder anderer Welten, anderer Zivilisationen. Die Botschaft war deutlich – du warst nicht der Erste, der diesen Ort entdeckte, und du würdest nicht der Letzte sein.
+  
+  Welches uralte Wissen erwartet dich in den Tiefen dieser fremden Struktur?`,
+    },
+  
+    romance: {
+      title: '💕 Liebe in Paris',
+      content: `Leiser Regen fiel auf die Kopfsteinpflasterstraßen von Paris, während du dich durch die engen Gassen von Montmartre beeiltest. Die Stadt der Liebe hatte schon immer einen besonderen Platz in deinem Herzen, doch heute fühlte es sich anders an.
+  
+  Du warst nach Paris gekommen, um Inspiration für deinen nächsten Roman zu finden, doch das Schicksal hatte andere Pläne. Als du in ein kleines Café flüchtetest, um dem Regen zu entkommen, standest du plötzlich jemandem gegenüber, der dein Leben für immer verändern würde.
+  
+  Das Café war gemütlich und warm, erfüllt vom Duft frisch gebackener Croissants und starken Kaffees. Gemälde lokaler Künstler schmückten die Wände, und leiser Jazz spielte im Hintergrund. Es war der perfekte Ort für eine romantische Begegnung.
+  
+  Sie saß am Fenster, vertieft in ein Buch, völlig unbeeindruckt von der Welt um sie herum. Ihr dunkles Haar fiel in weichen Wellen über ihre Schultern, und das Licht der Straßenlampen bildete einen Halo um sie.
+  
+  Als sie aufblickte und dich anlächelte, schien die Zeit stillzustehen. In diesem Moment wusstest du, dass dein Leben nie wieder dasselbe sein würde. Die Stadt Paris hatte erneut ihre Magie gewirkt und zwei Seelen zusammengeführt, die füreinander bestimmt waren.
+  
+  Welche Abenteuer erwarten euch in der romantischsten Stadt der Welt?`,
+    },
+  
+    horror: {
+      title: '👻 Das Verfluchte Herrenhaus',
+      content: `Das alte viktorianische Herrenhaus erhob sich vor dir, seine dunklen Fenster starrten wie leere Augen in die Nacht. Du hattest diesen Ort von deinem Großonkel geerbt, aber die Einheimischen hatten dich vor den seltsamen Ereignissen gewarnt, die sich innerhalb seiner Mauern abspielten.
+  
+  Als du durch die Vordertür tratst, wurde die Luft schwer vom Geruch alten Holzes und etwas anderem – etwas, das du nicht genau identifizieren konntest. Die Dielen knarrten unter deinen Füßen, und du hörtest den Wind durch den Schornstein heulen.
+  
+  Das Herrenhaus war voller antiker Möbel und Familienporträts, deren Blicke dir zu folgen schienen. Im Salon fandest du das Tagebuch deines Großonkels, gefüllt mit wirren Einträgen über Stimmen in der Nacht und Schatten, die sich von selbst bewegten.
+  
+  Je tiefer du das Haus erkundetest, desto mehr fiel dir auf, was sich nicht erklären ließ. Türen öffneten und schlossen sich von selbst, und Schritte hallten durch leere Flure. Die Temperatur fiel plötzlich ab, und du spürtest Blicke aus der Dunkelheit.
+  
+  Auf dem Dachboden entdecktest du einen Raum, der seit Jahrzehnten versiegelt war. Die Tür war mit seltsamen Symbolen bedeckt, und die Luft war schwer von einer bedrückenden Energie. Etwas wartete dort drinnen auf dich, etwas, das schon sehr lange gewartet hatte.
+  
+  Welche Schrecken lauern im Schatten deiner Familiengeschichte?`,
+    },
+  };
+  
 /* ------------------------------------------------------------------ */
 /* 🚀 Component                                                       */
 /* ------------------------------------------------------------------ */
