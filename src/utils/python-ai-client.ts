@@ -1,7 +1,7 @@
 import { getEnvVar } from '../config/env';
 
 export interface ChatMessage {
-  role: 'user' | 'assistant';
+  role: 'user' | 'assistant' | 'system';
   content: string;
 }
 
@@ -11,11 +11,9 @@ const getPythonServerUrl = (): string => {
   return serverUrl || 'http://localhost:8000';
 };
 
-export const callPythonAIServer = async (messages: ChatMessage[], method: 'conversational' | 'chat' = 'conversational'): Promise<string> => {
+export const answerGeneration = async (messages: ChatMessage[], method: 'conversational' | 'chat' = 'conversational'): Promise<string> => {
   try {
-    console.log('Calling Python AI Server');
-    console.log('Messages:', messages.length);
-    console.log('Method:', method);
+
     
     const serverUrl = getPythonServerUrl();
     const endpoint = '/chat';
@@ -47,6 +45,9 @@ export const callPythonAIServer = async (messages: ChatMessage[], method: 'conve
     throw error;
   }
 };
+
+
+
 
 export const checkPythonServerHealth = async (): Promise<boolean> => {
   try {

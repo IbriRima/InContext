@@ -39,6 +39,12 @@ def chat():
         if not messages:
             return jsonify({"error": "No messages provided"}), 400
 
+        system_prompt = {
+            "role": "system",
+            "content": "You are a friendly German language tutor. Respond in simple, helpful German sentences. Each answer should be in English the translate it to German and return bot english and german answers",
+        }
+        messages.insert(0, system_prompt)
+
         completion = client.chat.completions.create(model=MODEL_ID, messages=messages)
 
         reply = completion.choices[0].message.content

@@ -12,8 +12,7 @@ export interface ChatMessage {
 
 export const callHuggingFaceChat = async (messages: ChatMessage[]): Promise<string> => {
   try {
-    console.log('Using Hugging Face Inference Client');
-    console.log('Messages:', messages.length);
+
     
     const chatCompletion = await client.chatCompletion({
       provider: "together",
@@ -36,9 +35,7 @@ export const callHuggingFaceChat = async (messages: ChatMessage[]): Promise<stri
 
 export const callHuggingFaceConversational = async (messages: ChatMessage[]): Promise<string> => {
   try {
-    console.log('Using Hugging Face Conversational API');
-    console.log('Messages:', messages.length);
-    
+
     // Format messages for conversational API
     const userMessages = messages.filter(m => m.role === 'user').map(m => m.content);
     const assistantMessages = messages.filter(m => m.role === 'assistant').map(m => m.content);

@@ -12,8 +12,7 @@ export const callHuggingFaceAPI = async (
   try {
     const token = HF_CONFIG.TOKEN;
 
-    console.log('Token status:', token ? 'Token present' : 'Token missing');
-    console.log('Token length:', token?.length || 0);
+
 
     const response = await fetch(HF_CONFIG.MODEL_URL, {
       method: 'POST',

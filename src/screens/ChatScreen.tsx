@@ -8,7 +8,7 @@ import { ChatInput } from '../components/ChatInput';
 import { ChatHeader } from '../components/ChatHeader';
 import { chatStyles } from '../styles/chat';
 import { createInitialMessage } from '../utils/chat';
-import { callPythonAIServer, checkPythonServerHealth } from '../utils/python-ai-client';
+import { answerGeneration, checkPythonServerHealth } from '../utils/python-ai-client';
 import { debugEnvironment } from '../utils/debug';
 
 export default function ChatScreen({ route }: ChatScreenProps) {
@@ -18,7 +18,7 @@ export default function ChatScreen({ route }: ChatScreenProps) {
   React.useEffect(() => {
     debugEnvironment();
     checkPythonServerHealth().then(isHealthy => {
-      console.log('Python AI server health:', isHealthy);
+      console.debug('Python AI server health:', isHealthy);
     });
   }, []);
 
@@ -40,12 +40,11 @@ export default function ChatScreen({ route }: ChatScreenProps) {
     setLoading(true);
 
     try {
-      // Convert Message[] to ChatMessage[]
       const chatMessages = updatedMessages.map(msg => ({
         role: msg.role,
         content: msg.text,
       }));
-      const botReply = await callPythonAIServer(chatMessages);
+      const botReply = await answerGeneration(chatMessages);
       setMessages([...updatedMessages, { role: 'assistant', text: botReply }]);
     } catch (err) {
       console.error('API error:', err);

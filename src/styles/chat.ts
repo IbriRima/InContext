@@ -21,6 +21,23 @@ export const chatStyles = StyleSheet.create({
   loadingIndicator: {
     marginBottom: 8,
   },
+  translationBubble: {
+    marginTop: 4,
+    padding: 8,
+    backgroundColor: '#eee',
+    borderRadius: 6,
+    alignSelf: 'flex-start',
+  },
+  translationText: {
+    fontSize: 12,
+    color: '#555',
+    fontStyle: 'italic',
+  },
+  messageBubble: {
+    marginVertical: 4,
+    maxWidth: '80%',
+  },
+  
 });
 
 export const chatMessageStyles = StyleSheet.create({
@@ -67,3 +84,5 @@ export const chatInputStyles = StyleSheet.create({
     marginRight: 8,
   },
 }); 
+
+
