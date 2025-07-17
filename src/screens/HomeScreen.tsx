@@ -14,6 +14,7 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 type RootStackParamList = {
   Home: undefined;
   Login: undefined;
+  StoriesBook: undefined;
 };
 
 type Props = Readonly<NativeStackScreenProps<RootStackParamList, 'Home'>>;
@@ -51,6 +52,20 @@ export default function HomeScreen({ navigation }: Props) {
           </Text>
           <TouchableOpacity style={styles.button}>
             <Text style={styles.buttonText}>View Progress</Text>
+          </TouchableOpacity>
+        </View>
+
+        {/* --- Storybook Card --- */}
+        <View style={styles.card}>
+          <Text style={styles.cardTitle}>📚 Story Library</Text>
+          <Text style={styles.cardText}>
+            Explore immersive stories in different genres to enhance your language learning experience.
+          </Text>
+          <TouchableOpacity 
+            style={styles.button}
+            onPress={() => navigation.navigate('StoriesBook')}
+          >
+            <Text style={styles.buttonText}>Explore Stories</Text>
           </TouchableOpacity>
         </View>
 

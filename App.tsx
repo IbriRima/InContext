@@ -9,6 +9,9 @@ import {
 import LoginScreen from './src/screens/LoginScreen';
 import MapScreen   from './src/screens/MapScreen';
 import ChatScreen  from './src/screens/ChatScreen';
+import HomeScreen  from './src/screens/HomeScreen';
+import StoriesBookScreen from './src/screens/storiesBook';
+import StoryScreen from './src/screens/storyScreen';
 
 /* ------------------------------------------------------------------ */
 /* 🔑 All route names and params in one place                          */
@@ -17,6 +20,9 @@ export type RootStackParamList = {
   Login: undefined;
   Map:   undefined;
   Chat:  { place?: string };   // adjust if Chat takes different params
+  Home:  undefined;
+  StoriesBook: undefined;
+  Story: { storyId: string; storyTitle: string };
 };
 
 /* ------------------------------------------------------------------ */
@@ -43,6 +49,9 @@ export default function App(): React.JSX.Element {
           <Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="Map"   component={MapScreen}   />
           <Stack.Screen name="Chat"  component={ChatScreen}  />
+          <Stack.Screen name="Home"  component={HomeScreen}  />
+          <Stack.Screen name="StoriesBook" component={StoriesBookScreen} />
+          <Stack.Screen name="Story"  component={StoryScreen}  />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>

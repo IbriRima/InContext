@@ -14,7 +14,9 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 type RootStackParamList = {
   Map: undefined;
   Chat: { place: string };
-  Login: undefined; // add others if needed
+  Login: undefined;
+  Home: undefined;
+  StoriesBook: undefined;
 };
 
 /* 🛡 Read-only props (Sonar rule S6759) */
@@ -56,6 +58,22 @@ export default function MapScreen({ navigation }: Props) {
         >
           <Text style={styles.tileText}>🧍 Tourist</Text>
         </TouchableOpacity>
+
+        {/* 📚 Story Library */}
+        <TouchableOpacity
+          style={[styles.tile, styles.storyTile]}
+          onPress={() => navigation.navigate('StoriesBook')}
+        >
+          <Text style={styles.tileText}>📚 Story Library</Text>
+        </TouchableOpacity>
+
+        {/* 🏠 Home */}
+        <TouchableOpacity
+          style={[styles.tile, styles.homeTile]}
+          onPress={() => navigation.navigate('Home')}
+        >
+          <Text style={styles.tileText}>🏠 Home</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -92,6 +110,8 @@ const styles = StyleSheet.create({
   },
   shopTile: { backgroundColor: '#ffe3a3' },
   npcTile: { backgroundColor: '#b0f3c8' },
+  storyTile: { backgroundColor: '#e8f5e8' },
+  homeTile: { backgroundColor: '#fce4ec' },
   tileText: {
     fontSize: 18,
     fontWeight: '600',
