@@ -12,10 +12,19 @@ import type { StoryScreenProps } from '../types/navigation';
 
 type Props = StoryScreenProps;
 
+interface StoryContent {
+  title: string;
+  content: string;
+}
+
+interface StoryContentMap {
+  [key: string]: StoryContent;
+}
+
 /* ------------------------------------------------------------------ */
 /* 📖 Story Content                                                    */
 /* ------------------------------------------------------------------ */
-const storyContent = {
+const storyContent: StoryContentMap = {
     adventure: {
       title: '🌄 Das Bergabenteuer',
       content: `Die frische Bergluft füllte deine Lungen, als du am Fuße der gewaltigen Gipfel standest. Der uralte Steinpfad schlängelte sich nach oben und verschwand in den nebligen Wolken darüber.
@@ -109,8 +118,8 @@ const storyContent = {
 /* 🚀 Component                                                       */
 /* ------------------------------------------------------------------ */
 export default function StoryScreen({ route, navigation }: Props) {
-  const { storyId, storyTitle } = route.params;
-  const [currentStory, setCurrentStory] = useState<any>(null);
+  const { storyId } = route.params;
+  const [currentStory, setCurrentStory] = useState<StoryContent | null>(null);
   const insets = useSafeAreaInsets();
 
   useEffect(() => {

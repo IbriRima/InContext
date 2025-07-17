@@ -12,7 +12,7 @@ import type { MapScreenProps } from '../types/navigation';
 /* 🛡 Read-only props (Sonar rule S6759) */
 type Props = MapScreenProps;
 
-const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
+const { width: screenWidth } = Dimensions.get('window');
 
 /* ------------------------------------------------------------------ */
 /* 📚 Story Data                                                      */

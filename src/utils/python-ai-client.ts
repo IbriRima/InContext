@@ -11,7 +11,7 @@ const getPythonServerUrl = (): string => {
   return serverUrl || 'http://localhost:8000';
 };
 
-export const answerGeneration = async (messages: ChatMessage[], method: 'conversational' | 'chat' = 'conversational'): Promise<string> => {
+export const answerGeneration = async (messages: ChatMessage[]): Promise<string> => {
   try {
 
     
