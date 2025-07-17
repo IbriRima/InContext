@@ -1,5 +1,6 @@
 import { InferenceClient } from '@huggingface/inference';
 import { getEnvVar } from '../config/env';
+import { ChatCompletionInputMessage } from '@huggingface/tasks';
 
 // Create the inference client with the token
 const client = new InferenceClient(getEnvVar('HUGGING_FACE_TOKEN'));
@@ -17,7 +18,7 @@ export const callHuggingFaceChat = async (messages: ChatMessage[]): Promise<stri
     const chatCompletion = await client.chatCompletion({
       provider: "together",
       model: "deepseek-ai/DeepSeek-R1-0528",
-      messages: messages as any, // Type assertion for compatibility
+      messages: messages as unknown as ChatCompletionInputMessage[], // Type assertion for compatibility
     });
 
     const response = chatCompletion.choices[0]?.message?.content;

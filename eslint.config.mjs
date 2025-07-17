@@ -28,4 +28,10 @@ export default [
       ...tsPlugin.configs.recommended.rules,
     },
   },
+  {
+    ignores: [
+      'venv/',
+      '**/site-packages/**'
+    ]
+  },
 ];
