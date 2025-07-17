@@ -1,5 +1,9 @@
-Flask==2.3.3
-Flask-CORS==4.0.0
-requests==2.31.0
+flask==2.3.3
+flask-cors==4.0.0
 python-dotenv==1.0.0
-huggingface_hub==0.33.4 
+huggingface-hub==0.19.4
+openai-whisper==20231117
+torch==2.1.0
+torchaudio==2.1.0
+numpy<2.0.0
+yt-dlp==2025.6.30 

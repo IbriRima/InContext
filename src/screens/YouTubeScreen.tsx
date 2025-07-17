@@ -8,15 +8,19 @@ import {
   Alert,
   SafeAreaView,
   ScrollView,
+  ActivityIndicator,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import type { YouTubeScreenProps } from '../types/navigation';
+import { transcribeYouTubeVideo, TranscriptionResult } from '../utils/python-ai-client';
 
 type Props = YouTubeScreenProps;
 
 export default function YouTubeScreen({ navigation }: Props) {
   const [youtubeUrl, setYoutubeUrl] = useState('');
   const [isValidUrl, setIsValidUrl] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [transcriptionResult, setTranscriptionResult] = useState<TranscriptionResult | null>(null);
   const insets = useSafeAreaInsets();
 
   const validateYouTubeUrl = (url: string): boolean => {
@@ -28,9 +32,13 @@ export default function YouTubeScreen({ navigation }: Props) {
   const handleUrlChange = (text: string) => {
     setYoutubeUrl(text);
     setIsValidUrl(validateYouTubeUrl(text));
+    // Clear previous results when URL changes
+    if (transcriptionResult) {
+      setTranscriptionResult(null);
+    }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!youtubeUrl.trim()) {
       Alert.alert('Error', 'Please enter a YouTube URL');
       return;
@@ -41,26 +49,33 @@ export default function YouTubeScreen({ navigation }: Props) {
       return;
     }
 
-    // Here you can add logic to process the YouTube URL
-    // For now, we'll just show a success message
-    Alert.alert(
-      'Success!',
-      'YouTube URL submitted successfully!',
-      [
-        {
-          text: 'OK',
-          onPress: () => {
-            setYoutubeUrl('');
-            setIsValidUrl(false);
-          }
-        }
-      ]
-    );
+    setIsLoading(true);
+    setTranscriptionResult(null);
+
+    try {
+      const result = await transcribeYouTubeVideo(youtubeUrl);
+      setTranscriptionResult(result);
+      Alert.alert(
+        'Success!',
+        'Video transcribed successfully!',
+        [{ text: 'OK' }]
+      );
+    } catch (error) {
+      console.error('Transcription error:', error);
+      Alert.alert(
+        'Error',
+        `Failed to transcribe video: ${error instanceof Error ? error.message : 'Unknown error'}`,
+        [{ text: 'OK' }]
+      );
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleClear = () => {
     setYoutubeUrl('');
     setIsValidUrl(false);
+    setTranscriptionResult(null);
   };
 
   return (
@@ -72,7 +87,7 @@ export default function YouTubeScreen({ navigation }: Props) {
         >
           <Text style={styles.backButtonText}>← Back</Text>
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>📺 YouTube Link</Text>
+        <Text style={styles.headerTitle}>📺 YouTube Transcription</Text>
       </View>
 
       <ScrollView 
@@ -94,6 +109,7 @@ export default function YouTubeScreen({ navigation }: Props) {
             autoCapitalize="none"
             autoCorrect={false}
             multiline={false}
+            editable={!isLoading}
           />
           
           {youtubeUrl && (
@@ -109,20 +125,46 @@ export default function YouTubeScreen({ navigation }: Props) {
 
         <View style={styles.buttonContainer}>
           <TouchableOpacity
-            style={[styles.button, styles.submitButton, !isValidUrl && styles.disabledButton]}
+            style={[
+              styles.button, 
+              styles.submitButton, 
+              (!isValidUrl || isLoading) && styles.disabledButton
+            ]}
             onPress={handleSubmit}
-            disabled={!isValidUrl}
+            disabled={!isValidUrl || isLoading}
           >
-            <Text style={styles.buttonText}>Submit URL</Text>
+            {isLoading ? (
+              <View style={styles.loadingContainer}>
+                <ActivityIndicator size="small" color="#ffffff" />
+                <Text style={styles.buttonText}>Transcribing...</Text>
+              </View>
+            ) : (
+              <Text style={styles.buttonText}>Transcribe Video</Text>
+            )}
           </TouchableOpacity>
 
           <TouchableOpacity
             style={[styles.button, styles.clearButton]}
             onPress={handleClear}
+            disabled={isLoading}
           >
             <Text style={styles.clearButtonText}>Clear</Text>
           </TouchableOpacity>
         </View>
+
+        {transcriptionResult && (
+          <View style={styles.resultContainer}>
+            <Text style={styles.resultTitle}>📝 Transcription Result</Text>
+            <View style={styles.resultInfo}>
+              <Text style={styles.resultLabel}>Title:</Text>
+              <Text style={styles.resultText}>{transcriptionResult.title}</Text>
+            </View>
+            <View style={styles.resultInfo}>
+              <Text style={styles.resultLabel}>Transcription:</Text>
+              <Text style={styles.transcriptionText}>{transcriptionResult.transcription}</Text>
+            </View>
+          </View>
+        )}
 
         <View style={styles.infoContainer}>
           <Text style={styles.infoTitle}>📋 Supported URL Formats:</Text>
@@ -131,6 +173,9 @@ export default function YouTubeScreen({ navigation }: Props) {
             • https://youtu.be/VIDEO_ID{'\n'}
             • https://youtube.com/watch?v=VIDEO_ID{'\n'}
             • www.youtube.com/watch?v=VIDEO_ID
+          </Text>
+          <Text style={styles.infoNote}>
+            ⚠️ Note: Transcription may take several minutes depending on video length.
           </Text>
         </View>
       </ScrollView>
@@ -256,22 +301,78 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
   },
-  infoContainer: {
-    backgroundColor: '#e3f2fd',
+  loadingContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  resultContainer: {
+    backgroundColor: '#ffffff',
     borderRadius: 12,
     padding: 20,
-    borderLeftWidth: 4,
-    borderLeftColor: '#2196f3',
+    marginBottom: 20,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  resultTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 16,
+    color: '#2c3e50',
+  },
+  resultInfo: {
+    marginBottom: 12,
+  },
+  resultLabel: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#6c757d',
+    marginBottom: 4,
+  },
+  resultText: {
+    fontSize: 16,
+    color: '#2c3e50',
+    fontWeight: '500',
+  },
+  transcriptionText: {
+    fontSize: 14,
+    color: '#2c3e50',
+    lineHeight: 20,
+    textAlign: 'justify',
+  },
+  infoContainer: {
+    backgroundColor: '#ffffff',
+    borderRadius: 12,
+    padding: 20,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   infoTitle: {
     fontSize: 16,
     fontWeight: 'bold',
     marginBottom: 12,
-    color: '#1976d2',
+    color: '#2c3e50',
   },
   infoText: {
     fontSize: 14,
+    color: '#6c757d',
     lineHeight: 20,
-    color: '#424242',
+    marginBottom: 12,
+  },
+  infoNote: {
+    fontSize: 12,
+    color: '#dc3545',
+    fontStyle: 'italic',
   },
 }); 

@@ -5,6 +5,13 @@ export interface ChatMessage {
   content: string;
 }
 
+export interface TranscriptionResult {
+  success: boolean;
+  title: string;
+  transcription: string;
+  url: string;
+}
+
 // Get the Python server URL from environment or use default
 const getPythonServerUrl = (): string => {
   const serverUrl = getEnvVar('PYTHON_AI_SERVER_URL');
@@ -46,8 +53,38 @@ export const answerGeneration = async (messages: ChatMessage[]): Promise<string>
   }
 };
 
+export const transcribeYouTubeVideo = async (youtubeUrl: string): Promise<TranscriptionResult> => {
+  try {
+    const serverUrl = getPythonServerUrl();
+    const endpoint = '/transcribe';
+    
+    const response = await fetch(`${serverUrl}${endpoint}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        url: youtubeUrl,
+      }),
+    });
 
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`HTTP error! status: ${response.status}, message: ${errorText}`);
+    }
 
+    const data = await response.json();
+    
+    if (data.error) {
+      throw new Error(data.error);
+    }
+
+    return data as TranscriptionResult;
+  } catch (error) {
+    console.error('YouTube transcription error:', error);
+    throw error;
+  }
+};
 
 export const checkPythonServerHealth = async (): Promise<boolean> => {
   try {
