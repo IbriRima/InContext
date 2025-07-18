@@ -7,10 +7,10 @@ import {
   Dimensions,
   ScrollView,
 } from 'react-native';
-import type { MapScreenProps } from '../types/navigation';
+import type { StoriesBookScreenProps } from '../types/navigation';
 
 /* 🛡 Read-only props (Sonar rule S6759) */
-type Props = MapScreenProps;
+type Props = StoriesBookScreenProps;
 
 const { width: screenWidth } = Dimensions.get('window');
 

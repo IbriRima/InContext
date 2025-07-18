@@ -4,21 +4,17 @@ Test script for YouTube transcription functionality
 """
 
 import requests
-import json
-import time
 
 
 def test_transcription():
     """Test the transcription endpoint"""
 
-    # Test URL (a short, reliable educational video)
-    test_url = "https://www.youtube.com/watch?v=9bZkp7q19f0"  # PSY - GANGNAM STYLE
+    test_url = "https://www.youtube.com/watch?v=9bZkp7q19f0"
 
     print("Testing YouTube transcription...")
     print(f"URL: {test_url}")
 
     try:
-        # Make request to transcription endpoint
         response = requests.post(
             "http://localhost:8000/transcribe",
             json={"url": test_url},

@@ -6,9 +6,11 @@ import {
   ScrollView,
   TouchableOpacity,
   SafeAreaView,
+  ActivityIndicator,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import type { StoryScreenProps } from '../types/navigation';
+
 
 type Props = StoryScreenProps;
 
@@ -27,9 +29,7 @@ interface StoryContentMap {
 const storyContent: StoryContentMap = {
     adventure: {
       title: '🌄 Das Bergabenteuer',
-      content: `Die frische Bergluft füllte deine Lungen, als du am Fuße der gewaltigen Gipfel standest. Der uralte Steinpfad schlängelte sich nach oben und verschwand in den nebligen Wolken darüber.
-  
-  Deine Reise begann mit einer einfachen Karte und einem Herzen voller Mut. Die Einheimischen hatten dich vor den geheimnisvollen Geräuschen gewarnt, die nachts durch die Täler hallten, doch nichts konnte dich davon abhalten, herauszufinden, was in diesen heiligen Bergen verborgen lag.
+      content: `Deine Reise begann mit einer einfachen Karte und einem Herzen voller Mut. Die Einheimischen hatten dich vor den geheimnisvollen Geräuschen gewarnt, die nachts durch die Täler hallten, doch nichts konnte dich davon abhalten, herauszufinden, was in diesen heiligen Bergen verborgen lag.
   
   Je höher du stiegst, desto dünner wurde die Luft und desto gefährlicher der Pfad. Seltsame Markierungen auf den Felsen schienen von jenen zu erzählen, die vor dir gekommen waren. Jeder Schritt brachte dich der Wahrheit näher, die dich hierher geführt hatte.
   
@@ -42,22 +42,18 @@ const storyContent: StoryContentMap = {
       title: '🔍 Die Verborgene Bibliothek',
       content: `Das alte Universitätsgebäude hatte schon immer eine geheimnisvolle Aura, doch heute war es anders. Als du durch den großen Eingang tratst, fiel dir etwas Merkwürdiges auf – eine Tür, die gestern noch nicht da gewesen war.
   
-  Die Tür war klein und unscheinbar, versteckt hinter einem staubigen Bücherregal. Ihr Messinggriff glänzte, als wäre er erst kürzlich poliert worden, obwohl seit Monaten niemand diesen Teil der Bibliothek betreten hatte.
+  Die Bibliothek war still und verlassen, nur das leise Rascheln von Papier und das Knarren der alten Holzdielen unterbrach die Stille. Du folgtest dem Pfad zwischen den hohen Bücherregalen, die bis zur Decke reichten und mit Tausenden von Büchern gefüllt waren.
   
-  Deine Neugier siegte, und du griffst nach dem Griff. Zu deiner Überraschung drehte er sich mühelos und gab eine schmale Treppe frei, die hinab in die Dunkelheit führte. Die Luft war kühl und roch nach altem Pergament und Leder.
+  Plötzlich hieltst du inne. Ein Buch hatte sich von selbst geöffnet, und seine Seiten flatterten im unsichtbaren Wind. Als du näher tratst, sahst du, dass es ein Tagebuch war, geschrieben in einer Handschrift, die du nicht kanntest.
   
-  Als du die Treppe hinabstiegst, befandest du dich in einer Kammer, wie du sie noch nie gesehen hattest. Bücher säumten die Wände vom Boden bis zur Decke, ihre Rücken leuchteten in einem unirdischen Licht. Einige Titel waren in Sprachen geschrieben, die du nicht erkennen konntest.
+  Die Einträge erzählten von einem verborgenen Raum, der nur in bestimmten Nächten zugänglich war. Der Autor hatte Hinweise hinterlassen, die zu einem Schatz führten, der seit Jahrhunderten versteckt war.
   
-  In der Mitte des Raumes stand ein massiver Holztisch, bedeckt mit uralten Manuskripten und geheimnisvollen Artefakten. Ein Buch erregte besonders deine Aufmerksamkeit – es schien vor Energie zu pulsieren, als wäre es lebendig.
-  
-  Der Bibliothekar hatte diesen Ort nie erwähnt, und du warst sicher, dass er auf keinem Grundriss des Gebäudes verzeichnet war. Welche Geheimnisse birgt diese verborgene Bibliothek?`,
+  Du spürtest, dass du kurz davor warst, ein Geheimnis zu entdecken, das die Welt verändern würde. Doch die Zeit lief davon, und du wusstest, dass du nicht der Einzige warst, der nach diesem Schatz suchte.`,
     },
   
     fantasy: {
       title: '🐉 Der Schatz des Drachen',
-      content: `Die uralten Schriftrollen erzählten von einem Drachenschatz, der tief in den Kristallhöhlen verborgen und von einer Magie geschützt war, die älter war als das Königreich selbst. Als du den Höhleneingang erreichtest, spürtest du die Kraft, die aus dem Inneren strömte.
-  
-  Dein Abenteuer hatte mit einer einfachen Karte begonnen, die du in den Ruinen eines alten Zaubererturms gefunden hattest. Das Pergament war brüchig und vergilbt, doch die Anweisungen waren klar – folge dem Pfad der untergehenden Sonne, bis du den Berg mit den zwei Gipfeln erreichst.
+      content: `Das Abenteuer hatte mit einer einfachen Karte begonnen, die du in den Ruinen eines alten Zaubererturms gefunden hattest. Das Pergament war brüchig und vergilbt, doch die Anweisungen waren klar – folge dem Pfad der untergehenden Sonne, bis du den Berg mit den zwei Gipfeln erreichst.
   
   Der Höhleneingang war mit Runen markiert, die in einem sanften blauen Licht leuchteten. Als du eintratst, wurde die Luft wärmer, und du hörtest das entfernte Tropfen von Wasser, das von Kristallformationen fiel.
   
@@ -72,22 +68,18 @@ const storyContent: StoryContentMap = {
       title: '🚀 Weltraumforscher',
       content: `Wir schreiben das Jahr 2157, und du bist der erste Mensch, der den geheimnisvollen Planeten XR-847 betritt. Dein Raumschiff, die Stellar Pioneer, hatte ungewöhnliche Energiesignaturen auf der Oberfläche des Planeten festgestellt.
   
-  Als du aus deiner Landekapsel tratst, erstreckte sich die fremdartige Landschaft in alle Richtungen. Der Himmel war ein tiefes Violett, und zwei Monde hingen niedrig am Horizont. Die Luft war atembar, trug jedoch einen süßen, ungewohnten Duft.
+  Als du die Luftschleuse öffnetest, wurde dein Helm von einem seltsamen violetten Licht erfüllt. Die Atmosphäre war atembar, doch sie hatte einen metallischen Geschmack, der dich an Kupfer erinnerte.
   
-  Deine Mission war einfach: Untersuche die Energiequelle und bestimme, ob der Planet für eine menschliche Kolonie geeignet ist. Doch schon zu Beginn deiner Erkundung wurde dir klar, dass XR-847 Geheimnisse birgt, die das Verständnis der Menschheit vom Universum verändern würden.
+  Die Landschaft war atemberaubend – kristalline Formationen, die in allen Regenbogenfarben schimmerten, erstreckten sich bis zum Horizont. Die Schwerkraft war geringer als auf der Erde, und du konntest mühelos große Sprünge machen.
   
-  Die Energiesignaturen führten dich zu einer gewaltigen Struktur, die halb Gebäude, halb lebender Organismus zu sein schien. Ihre Wände pulsierten vor Licht, und seltsame Symbole bedeckten jede Fläche. Als du dich näherstest, schien die Struktur deine Präsenz zu erkennen.
+  Plötzlich entdecktest du Spuren im violetten Sand – sie waren definitiv nicht von Menschen gemacht. Die Abdrücke waren dreifach und führten zu einer Höhle, die von einem pulsierenden Licht erfüllt war.
   
-  Eine holografische Projektion erschien vor dir und zeigte Bilder anderer Welten, anderer Zivilisationen. Die Botschaft war deutlich – du warst nicht der Erste, der diesen Ort entdeckte, und du würdest nicht der Letzte sein.
-  
-  Welches uralte Wissen erwartet dich in den Tiefen dieser fremden Struktur?`,
+  Du wusstest, dass du kurz davor warst, die erste Begegnung der Menschheit mit außerirdischem Leben zu erleben. Doch was würdest du tun, wenn die Bewohner dieses Planeten nicht friedlich waren?`,
     },
   
     romance: {
       title: '💕 Liebe in Paris',
-      content: `Leiser Regen fiel auf die Kopfsteinpflasterstraßen von Paris, während du dich durch die engen Gassen von Montmartre beeiltest. Die Stadt der Liebe hatte schon immer einen besonderen Platz in deinem Herzen, doch heute fühlte es sich anders an.
-  
-  Du warst nach Paris gekommen, um Inspiration für deinen nächsten Roman zu finden, doch das Schicksal hatte andere Pläne. Als du in ein kleines Café flüchtetest, um dem Regen zu entkommen, standest du plötzlich jemandem gegenüber, der dein Leben für immer verändern würde.
+      content: `Du warst nach Paris gekommen, um Inspiration für deinen nächsten Roman zu finden, doch das Schicksal hatte andere Pläne. Als du in ein kleines Café flüchtetest, um dem Regen zu entkommen, standest du plötzlich jemandem gegenüber, der dein Leben für immer verändern würde.
   
   Das Café war gemütlich und warm, erfüllt vom Duft frisch gebackener Croissants und starken Kaffees. Gemälde lokaler Künstler schmückten die Wände, und leiser Jazz spielte im Hintergrund. Es war der perfekte Ort für eine romantische Begegnung.
   
@@ -113,13 +105,99 @@ const storyContent: StoryContentMap = {
   Welche Schrecken lauern im Schatten deiner Familiengeschichte?`,
     },
   };
+
+/* ------------------------------------------------------------------ */
+/* 🔧 Helper Functions                                                 */
+/* ------------------------------------------------------------------ */
+
+function renderStoryWithClickableWords(text: string, onTranslationRequest: (text: string) => void, pressedElement: string | null, setPressedElement: (element: string | null) => void) {
+  // Split text into words while preserving whitespace
+  const words = text.split(/(\s+)/);
   
+  return (
+    <Text style={styles.storyText}>
+      {words.map((word, index) => {
+        const isWhitespace = /^\s+$/.test(word);
+        
+        if (isWhitespace) {
+          return <Text key={index}>{word}</Text>;
+        }
+        
+        const isPressed = pressedElement === word;
+        
+        return (
+          <TouchableOpacity
+            key={index}
+            onPress={() => onTranslationRequest(word)}
+            onPressIn={() => setPressedElement(word)}
+            onPressOut={() => setPressedElement(null)}
+            style={word.trim().length > 1 ? styles.clickableWord : undefined}
+          >
+            <Text style={[
+              styles.storyText, 
+              word.trim().length > 1 ? (isPressed ? styles.pressedText : styles.normalText) : styles.normalText
+            ]}>
+              {word}
+            </Text>
+          </TouchableOpacity>
+        );
+      })}
+    </Text>
+  );
+}
+
+function renderStoryWithClickableSentences(text: string, onTranslationRequest: (text: string) => void, pressedElement: string | null, setPressedElement: (element: string | null) => void) {
+  // Simple sentence splitting - split on sentence endings
+  const sentences = text.split(/(?<=[.!?])\s+/);
+  
+  return (
+    <Text style={styles.storyText}>
+      {sentences.map((sentence, index) => {
+        if (!sentence.trim()) {
+          return null;
+        }
+        
+        // Only make clickable if it's a complete sentence (ends with punctuation)
+        const isCompleteSentence = /[.!?]$/.test(sentence.trim());
+        
+        if (isCompleteSentence && sentence.trim().length > 10) {
+          const isPressed = pressedElement === sentence;
+          
+          return (
+            <TouchableOpacity
+              key={index}
+              onPress={() => onTranslationRequest(sentence)}
+              onPressIn={() => setPressedElement(sentence)}
+              onPressOut={() => setPressedElement(null)}
+              style={styles.clickableSentence}
+            >
+              <Text style={[styles.storyText, isPressed ? styles.pressedText : styles.normalText]}>
+                {sentence}
+              </Text>
+            </TouchableOpacity>
+          );
+        } else {
+          return <Text key={index}>{sentence}</Text>;
+        }
+      })}
+    </Text>
+  );
+}
+
 /* ------------------------------------------------------------------ */
 /* 🚀 Component                                                       */
 /* ------------------------------------------------------------------ */
 export default function StoryScreen({ route, navigation }: Props) {
   const { storyId } = route.params;
   const [currentStory, setCurrentStory] = useState<StoryContent | null>(null);
+  const [translationMode, setTranslationMode] = useState<'words' | 'sentences'>('words');
+  const [showTranslationModal, setShowTranslationModal] = useState(false);
+  const [translationData, setTranslationData] = useState<{
+    original: string;
+    translation: string;
+    isLoading: boolean;
+  }>({ original: '', translation: '', isLoading: false });
+  const [pressedElement, setPressedElement] = useState<string | null>(null);
   const insets = useSafeAreaInsets();
 
   useEffect(() => {
@@ -128,6 +206,38 @@ export default function StoryScreen({ route, navigation }: Props) {
       setCurrentStory(story);
     }
   }, [storyId]);
+
+  const handleTranslationRequest = async (text: string, isSentence: boolean = false) => {
+    setTranslationData({ original: text, translation: '', isLoading: true });
+    setShowTranslationModal(true);
+    
+    try {
+      const result = isSentence 
+        ? await import('../utils/translation').then(m => m.translateSentence(text))
+        : await import('../utils/translation').then(m => m.translateWord(text));
+      
+      if (result.success) {
+        setTranslationData({ 
+          original: text, 
+          translation: result.translation, 
+          isLoading: false 
+        });
+      } else {
+        setTranslationData({ 
+          original: text, 
+          translation: 'Translation not available', 
+          isLoading: false 
+        });
+      }
+    } catch (error) {
+      console.error('Translation error:', error);
+      setTranslationData({ 
+        original: text, 
+        translation: 'Translation failed', 
+        isLoading: false 
+      });
+    }
+  };
 
   if (!currentStory) {
     return (
@@ -149,17 +259,86 @@ export default function StoryScreen({ route, navigation }: Props) {
         <Text style={styles.headerTitle}>{currentStory.title}</Text>
       </View>
 
+      <View style={styles.translationModeContainer}>
+        <TouchableOpacity
+          style={[
+            styles.modeButton,
+            translationMode === 'words' && styles.activeModeButton
+          ]}
+          onPress={() => setTranslationMode('words')}
+        >
+          <Text style={[
+            styles.modeButtonText,
+            translationMode === 'words' && styles.activeModeButtonText
+          ]}>
+            Words
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[
+            styles.modeButton,
+            translationMode === 'sentences' && styles.activeModeButton
+          ]}
+          onPress={() => setTranslationMode('sentences')}
+        >
+          <Text style={[
+            styles.modeButtonText,
+            translationMode === 'sentences' && styles.activeModeButtonText
+          ]}>
+            Sentences
+          </Text>
+        </TouchableOpacity>
+      </View>
+
       <View style={[styles.contentContainer, { marginBottom: insets.bottom + 20 }]}>
         <ScrollView 
           style={styles.scrollView}
           contentContainerStyle={styles.scrollContent}
-          showsVerticalScrollIndicator={true}
           bounces={true}
           alwaysBounceVertical={false}
         >
-          <Text style={styles.storyText}>{currentStory.content}</Text>
+          <View style={styles.storyTextContainer}>
+            {translationMode === 'words' 
+              ? renderStoryWithClickableWords(currentStory.content, (text) => handleTranslationRequest(text, false), pressedElement, setPressedElement)
+              : renderStoryWithClickableSentences(currentStory.content, (text) => handleTranslationRequest(text, true), pressedElement, setPressedElement)
+            }
+          </View>
         </ScrollView>
       </View>
+
+      {/* Translation Modal */}
+      {showTranslationModal && (
+        <View style={styles.modalOverlay}>
+          <TouchableOpacity
+            style={styles.modalOverlay}
+            activeOpacity={1}
+            onPress={() => setShowTranslationModal(false)}
+          >
+            <View style={styles.modalContent}>
+              <Text style={styles.modalTitle}>
+                {translationMode === 'words' ? 'Word Translation' : 'Sentence Translation'}
+              </Text>
+              <Text style={styles.originalText}>{translationData.original}</Text>
+              
+              {translationData.isLoading ? (
+                <View style={styles.loadingContainer}>
+                  <ActivityIndicator size="small" color="#007bff" />
+                  <Text style={styles.loadingText}>Translating...</Text>
+                </View>
+              ) : (
+                <Text style={styles.translationText}>{translationData.translation}</Text>
+              )}
+              
+              <TouchableOpacity
+                style={styles.closeButton}
+                onPress={() => setShowTranslationModal(false)}
+              >
+                <Text style={styles.closeButtonText}>Close</Text>
+              </TouchableOpacity>
+            </View>
+          </TouchableOpacity>
+        </View>
+      )}
     </SafeAreaView>
   );
 }
@@ -195,6 +374,34 @@ const styles = StyleSheet.create({
     color: '#2c3e50',
     flex: 1,
   },
+  translationModeContainer: {
+    flexDirection: 'row',
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    backgroundColor: '#ffffff',
+    borderBottomWidth: 1,
+    borderBottomColor: '#e9ecef',
+  },
+  modeButton: {
+    flex: 1,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    marginHorizontal: 4,
+    borderRadius: 8,
+    backgroundColor: '#f8f9fa',
+    alignItems: 'center',
+  },
+  activeModeButton: {
+    backgroundColor: '#007bff',
+  },
+  modeButtonText: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#6c757d',
+  },
+  activeModeButtonText: {
+    color: '#ffffff',
+  },
   contentContainer: {
     flex: 1,
     marginHorizontal: 16,
@@ -217,16 +424,97 @@ const styles = StyleSheet.create({
   scrollContent: {
     paddingBottom: 20,
   },
+  storyTextContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
   storyText: {
     fontSize: 16,
     lineHeight: 24,
     color: '#2c3e50',
-    textAlign: 'justify',
   },
   loadingText: {
-    fontSize: 18,
+    fontSize: 16,
     textAlign: 'center',
     marginTop: 50,
     color: '#7f8c8d',
+  },
+  clickableWord: {
+    paddingHorizontal: 2,
+    paddingVertical: 1,
+  },
+  clickableText: {
+    textDecorationLine: 'underline',
+    textDecorationStyle: 'solid',
+    textDecorationColor: '#007bff',
+  },
+  normalText: {
+    textDecorationLine: 'none',
+  },
+  clickableSentence: {
+    paddingVertical: 2,
+  },
+  pressedText: {
+    backgroundColor: '#e3f2fd', // Light blue background for pressed state
+    color: '#1976d2', // Darker blue text
+    paddingHorizontal: 2,
+    paddingVertical: 1,
+    borderRadius: 4,
+  },
+  modalOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 1000,
+  },
+  modalContent: {
+    backgroundColor: '#ffffff',
+    borderRadius: 12,
+    padding: 20,
+    width: '80%',
+    alignItems: 'center',
+  },
+  modalTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 15,
+    color: '#2c3e50',
+  },
+  originalText: {
+    fontSize: 18,
+    fontWeight: '600',
+    marginBottom: 15,
+    color: '#34495e',
+    textAlign: 'center',
+  },
+  loadingContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 10,
+  },
+
+  translationText: {
+    fontSize: 16,
+    lineHeight: 24,
+    color: '#2c3e50',
+    marginTop: 15,
+    textAlign: 'center',
+  },
+  closeButton: {
+    marginTop: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    backgroundColor: '#007bff',
+    borderRadius: 8,
+  },
+  closeButtonText: {
+    color: '#ffffff',
+    fontSize: 16,
+    fontWeight: '600',
   },
 });

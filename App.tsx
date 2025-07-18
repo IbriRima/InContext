@@ -10,8 +10,8 @@ import LoginScreen from './src/screens/LoginScreen';
 import MapScreen   from './src/screens/MapScreen';
 import ChatScreen  from './src/screens/ChatScreen';
 import HomeScreen  from './src/screens/HomeScreen';
-import StoriesBookScreen from './src/screens/storiesBook';
-import StoryScreen from './src/screens/storyScreen';
+import StoriesBookScreen from './src/screens/StoriesBookScreen';
+import StoryScreen from './src/screens/StoryScreen';
 import YouTubeScreen from './src/screens/YouTubeScreen';
 
 /* ------------------------------------------------------------------ */
