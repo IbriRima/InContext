@@ -1,0 +1,53 @@
+name: InContext CI/CD
+
+on:
+  workflow_dispatch: 
+
+  push:
+    branches: [main]
+
+  pull_request:
+
+jobs:
+
+  checks:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: npm
+
+      - run: npm ci
+      - run: npm run lint
+
+  manual-build:
+    # Only run if manually triggered
+    if: github.event_name == 'workflow_dispatch'
+    needs: checks
+    runs-on: ubuntu-latest
+
+    env:
+      EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: npm
+
+      - run: npm ci
+
+      - name: Install EAS CLI
+        run: npm install -g eas-cli
+
+      - name: Verify Expo token
+        run: eas whoami
+
+      - name: EAS Android production build
+        run: eas build --profile production --platform android --non-interactive

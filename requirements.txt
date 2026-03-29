@@ -1,0 +1,9 @@
+flask==2.3.3
+flask-cors==4.0.0
+python-dotenv==1.0.0
+huggingface-hub==0.19.4
+#openai-whisper==20231117
+torch
+torchaudio
+numpy<2.0.0
+yt-dlp==2025.6.30 

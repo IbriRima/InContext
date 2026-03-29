@@ -1,0 +1,113 @@
+import { getEnvVar } from '../config/env';
+
+export interface ChatMessage {
+  role: 'user' | 'assistant' | 'system';
+  content: string;
+}
+
+export interface TranscriptionResult {
+  success: boolean;
+  title: string;
+  transcription: string;
+  url: string;
+}
+
+// Get the Python server URL from environment or use default
+const getPythonServerUrl = (): string => {
+  const serverUrl = getEnvVar('PYTHON_AI_SERVER_URL');
+  return serverUrl || 'http://localhost:8000';
+};
+
+export const answerGeneration = async (messages: ChatMessage[]): Promise<string> => {
+  try {
+    const serverUrl = getPythonServerUrl();
+    const endpoint = '/chat';
+    const fullUrl = `${serverUrl}${endpoint}`;
+    
+    console.log('Attempting to connect to:', fullUrl);
+    console.log('With messages:', JSON.stringify(messages, null, 2));
+    
+    const response = await fetch(fullUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        messages: messages,
+      }),
+    });
+
+    console.log('Response status:', response.status);
+    
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('Server error response:', errorText);
+      throw new Error(`HTTP error! status: ${response.status}, message: ${errorText}`);
+    }
+
+    const data = await response.json();
+    console.log('Server response data:', data);
+    
+    if (data.error) {
+      throw new Error(data.error);
+    }
+
+    return data.response || 'No response from AI server';
+  } catch (error) {
+    console.error('Python AI Server error details:', error);
+    throw error;
+  }
+};
+
+export const transcribeYouTubeVideo = async (youtubeUrl: string): Promise<TranscriptionResult> => {
+  try {
+    const serverUrl = getPythonServerUrl();
+    const endpoint = '/transcribe';
+    
+    const response = await fetch(`${serverUrl}${endpoint}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        url: youtubeUrl,
+      }),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`HTTP error! status: ${response.status}, message: ${errorText}`);
+    }
+
+    const data = await response.json();
+    
+    if (data.error) {
+      throw new Error(data.error);
+    }
+
+    return data as TranscriptionResult;
+  } catch (error) {
+    console.error('YouTube transcription error:', error);
+    throw error;
+  }
+};
+
+export const checkPythonServerHealth = async (): Promise<boolean> => {
+  try {
+    const serverUrl = getPythonServerUrl();
+    console.log('Checking server health at:', serverUrl);
+    
+    const response = await fetch(`${serverUrl}/health`);
+    console.log('Health check status:', response.status);
+    
+    if (response.ok) {
+      const data = await response.json();
+      console.log('Server health response:', data);
+      return true;
+    }
+    return false;
+  } catch (error) {
+    console.error('Server health check error details:', error);
+    return false;
+  }
+}; 
