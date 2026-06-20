@@ -1,8 +1,6 @@
 import re
 import subprocess
-import logging
-
-logger = logging.getLogger("main_logger")   
+from utils.logger import logger
 
 def extract_video_id(url):
     """Extract video ID from various YouTube URL formats"""

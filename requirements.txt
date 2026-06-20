@@ -7,3 +7,4 @@ torch
 torchaudio
 numpy<2.0.0
 yt-dlp==2025.6.30 
+pre-commit==4.3.0

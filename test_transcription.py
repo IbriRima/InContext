@@ -1,18 +1,13 @@
-#!/usr/bin/env python3
-"""
-Test script for YouTube transcription functionality
-"""
-
 import requests
-
+from utils.logger import logger
 
 def test_transcription():
     """Test the transcription endpoint"""
 
     test_url = "https://www.youtube.com/watch?v=9bZkp7q19f0"
 
-    print("Testing YouTube transcription...")
-    print(f"URL: {test_url}")
+    logger.info("Testing YouTube transcription...")
+    logger.info(f"URL: {test_url}")
 
     try:
         response = requests.post(
@@ -23,16 +18,16 @@ def test_transcription():
 
         if response.status_code == 200:
             result = response.json()
-            print("✅ Transcription successful!")
-            print(f"Title: {result['title']}")
-            print(f"Transcription length: {len(result['transcription'])} characters")
-            print(f"First 200 chars: {result['transcription'][:200]}...")
+            logger.info("✅ Transcription successful!")
+            logger.info(f"Title: {result['title']}")
+            logger.info(f"Transcription length: {len(result['transcription'])} characters")
+            logger.info(f"First 200 chars: {result['transcription'][:200]}...")
         else:
-            print(f"❌ Transcription failed with status {response.status_code}")
-            print(f"Error: {response.text}")
+            logger.error(f"❌ Transcription failed with status {response.status_code}")
+            logger.error(f"Error: {response.text}")
 
-    except Exception as e:
-        print(f"❌ Test failed: {e}")
+    except Exception:
+        logger.exception("❌ Test failed")
 
 
 def test_health():
@@ -41,13 +36,13 @@ def test_health():
     try:
         response = requests.get("http://localhost:8000/health")
         if response.status_code == 200:
-            print("✅ Health check passed")
+            logger.info("✅ Health check passed")
             return True
         else:
-            print(f"❌ Health check failed: {response.status_code}")
+            logger.error(f"❌ Health check failed: {response.status_code}")
             return False
-    except Exception as e:
-        print(f"❌ Health check failed: {e}")
+    except Exception:
+        logger.exception("❌ Health check failed")
         return False
 
 
@@ -61,7 +56,7 @@ def test_url_validation():
         "https://www.youtube.com/watch?v=9bZkp7q19f0&feature=shared",
     ]
 
-    print("\nTesting URL validation...")
+    logger.info("\nTesting URL validation...")
     for url in test_urls:
         try:
             response = requests.post(
@@ -70,23 +65,23 @@ def test_url_validation():
                 timeout=10,  # Short timeout for validation test
             )
             if response.status_code == 200:
-                print(f"✅ {url} - Valid")
+                logger.info(f"✅ {url} - Valid")
             else:
-                print(f"❌ {url} - Invalid: {response.status_code}")
-        except Exception as e:
-            print(f"❌ {url} - Error: {e}")
+                logger.warning(f"❌ {url} - Invalid: {response.status_code}")
+        except Exception:
+            logger.exception(f"❌ {url} - Error")
 
 
 if __name__ == "__main__":
-    print("🧪 Testing YouTube Transcription Server")
-    print("=" * 50)
+    logger.info("🧪 Testing YouTube Transcription Server")
+    logger.info("=" * 50)
 
     # Test health first
     if test_health():
-        print("\n" + "=" * 50)
+        logger.info("\n" + "=" * 50)
         test_transcription()
-        print("\n" + "=" * 50)
+        logger.info("\n" + "=" * 50)
         test_url_validation()
     else:
-        print("❌ Server is not running. Please start the server first.")
-        print("Run: source venv/bin/activate && python ai_server.py")
+        logger.error("❌ Server is not running. Please start the server first.")
+        logger.info("Run: source venv/bin/activate && python ai_server.py")

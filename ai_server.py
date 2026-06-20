@@ -1,19 +1,14 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import os
-import re
 import time
 import subprocess
 import tempfile
 from dotenv import load_dotenv
-from huggingface_hub import InferenceClient
-import logging
 from shared.schema.shops import Shop
+from utils.logger import logger
 from utils.video_utils import extract_video_id, clean_youtube_url, get_video_info
 import whisper
-
-
-logger = logging.getLogger("main_logger")
 
 # Load environment variables
 load_dotenv()
